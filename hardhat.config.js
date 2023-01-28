@@ -11,8 +11,10 @@ module.exports = {
     defaultNetwork: "hyperspace",
     networks: {
         hyperspace: {
-            chainId: 3141,
-            url: "https://api.hyperspace.node.glif.io/rpc/v1",
+            // chainId: 3141,
+            // url: "https://api.hyperspace.node.glif.io/rpc/v1",
+            chainId: 31415926,
+            url: "https://shared-fvm-hyperspace-latest.quick.cluster-3.localnet.farm/rpc/v0",
             accounts: [PRIVATE_KEY],
         },
     },
