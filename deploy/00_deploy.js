@@ -8,6 +8,7 @@ const private_key = network.config.accounts[0]
 const wallet = new ethers.Wallet(private_key, ethers.provider)
 
 module.exports = async ({ deployments }) => {
+    /*
     console.log("Wallet Ethereum Address:", wallet.address)
     const chainId = network.config.chainId
     const tokensToBeMinted = networkConfig[chainId]["tokensToBeMinted"]
@@ -32,4 +33,12 @@ module.exports = async ({ deployments }) => {
     const dealRewarder = await DealRewarder.deploy();
     await dealRewarder.deployed()
     console.log('DealRewarder deployed to:', dealRewarder.address);
+    */
+
+    //deploy Counter
+    const Counter = await ethers.getContractFactory('Counter', wallet);
+    console.log('Deploying Counter...');
+    const counter = await Counter.deploy();
+    await counter.deployed()
+    console.log('Counter deployed to:', counter.address);
 }
