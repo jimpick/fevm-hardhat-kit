@@ -13,12 +13,15 @@ echo 'Block number:' $(cast block-number)
 
 #solc --base-path '.' --include-path 'contracts/lib' --abi --hashes --overwrite -o tmp contracts/filecoin-api-examples/Counter.sol
 
-# 6d1da431: minerCount()
+#9a34832d: echoBytes(bytes)
+#2eea1f77: getOwnerForMiner(bytes)
+#d09de08a: increment()
+#8381f58a: number()
+#3fb5c1cb: setNumber(uint256)
 
 set -x
 
-#cast call $CONTRACT "getOwnerForMiner(bytes)" 0x000000000000000000000000ff000000000000000000000000000000000003e8
-#cast call $CONTRACT "getOwnerForMiner(bytes)" 0x0003e8
+#cast call $CONTRACT "echoBytes(bytes)" 0x00000000deadbeef
+cast send --private-key $PRIVATE_KEY --gas-limit 100000000 $CONTRACT "echoBytes(bytes)" 0x00000000deadbeef
 
-cast send --private-key $PRIVATE_KEY --gas-limit 100000000 $CONTRACT "minerCount()"
 
