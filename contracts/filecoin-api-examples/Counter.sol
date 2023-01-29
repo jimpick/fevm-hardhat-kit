@@ -16,9 +16,11 @@ contract Counter {
         number++;
     }
 
-    function getOwnerForMiner(bytes memory target) public returns (MinerTypes.GetOwnerReturn memory) {
+    event Owner(MinerTypes.GetOwnerReturn);
+
+    function getOwnerForMiner(bytes memory target) public {
         MinerTypes.GetOwnerReturn memory ownerRet = MinerAPI.getOwner(target);
-        return ownerRet;
+        emit Owner(ownerRet);
     }
 
     function echoBytes(bytes memory target) public pure returns (bytes memory) {

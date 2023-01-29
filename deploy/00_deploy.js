@@ -13,11 +13,13 @@ module.exports = async ({ deployments }) => {
     const tokensToBeMinted = networkConfig[chainId]["tokensToBeMinted"]
 
     //deploy Simplecoin
+    /*
     const SimpleCoin = await ethers.getContractFactory('SimpleCoin', wallet);
     console.log('Deploying Simplecoin...');
     const simpleCoin = await SimpleCoin.deploy(tokensToBeMinted);
     await simpleCoin.deployed()
     console.log('SimpleCoin deployed to:', simpleCoin.address);
+    */
 
     /*
     //deploy FilecoinMarketConsumer

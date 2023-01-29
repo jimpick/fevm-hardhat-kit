@@ -21,7 +21,8 @@ echo 'Block number:' $(cast block-number)
 set -x
 
 #cast call $CONTRACT "getOwnerForMiner(bytes)" 0x000000000000000000000000ff000000000000000000000000000000000003e8
-cast call $CONTRACT "getOwnerForMiner(bytes)" 0x0003e8
+#cast call $CONTRACT "getOwnerForMiner(bytes)" 0x0003e8
+cast send --private-key $PRIVATE_KEY --gas-limit 100000000 $CONTRACT "getOwnerForMiner(bytes)" 0x03e8
 
 #cast send --private-key $PRIVATE_KEY $CONTRACT "getOwnerForMiner(bytes)" 0x00e807
 
