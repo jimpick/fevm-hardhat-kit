@@ -4,6 +4,7 @@ pragma solidity ^0.8.13;
 import { MinerAPI } from "../lib/filecoin-solidity/contracts/v0.8/MinerAPI.sol";
 import { MinerTypes } from "../lib/filecoin-solidity/contracts/v0.8/types/MinerTypes.sol";
 import { PowerAPI } from "../lib/filecoin-solidity/contracts/v0.8/PowerAPI.sol";
+import { PrecompilesAPI } from "../lib/filecoin-solidity/contracts/v0.8/PrecompilesAPI.sol";
 
 contract Counter {
     uint256 public number;
@@ -29,5 +30,17 @@ contract Counter {
 
     function minerCount() public returns (uint64) {
         return PowerAPI.minerCount();
+    }
+
+    function getContractAddress() public view returns (address) {
+      return address(this);
+    }
+
+    event ResolvedContractAddress(uint64);
+
+    function getResolvedContractAddress() public {
+      address contractAddress = address(this);
+      uint64 resolved = PrecompilesAPI.resolveEthAddress(abi.encodePacked(contractAddress));
+      emit ResolvedContractAddress(resolved);
     }
 }

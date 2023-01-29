@@ -1,4 +1,4 @@
-task("miner-owner", "Get miner owner")
+task("resolved-contract-address", "Get resolved contract address")
 .addParam("contract", "The contract address")
 .setAction(async (taskArgs) => {
     //store taskargs as useable variables
@@ -14,11 +14,10 @@ task("miner-owner", "Get miner owner")
     //this is what you will call to interact with the deployed contract
     const counterContract = await Counter.attach(contractAddr)
 
-    console.log("Getting miner owner:")
+    console.log("Getting resolved contract address:")
 
     //send transaction to call the sendCoin() method
-    const transaction = await counterContract.getOwnerForMiner(
-      "0x00e807",
+    const transaction = await counterContract.getResolvedContractAddress(
       {
         gasLimit: 10000000
       }
