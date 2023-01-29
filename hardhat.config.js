@@ -15,6 +15,8 @@ module.exports = {
             // url: "https://api.hyperspace.node.glif.io/rpc/v1",
             chainId: 31415926,
             url: "https://shared-fvm-hyperspace-latest.quick.cluster-3.localnet.farm/rpc/v0",
+            // chainId: 31415926,
+            // url: "https://shared-fvm-hyperspace-latest-trace.quick.cluster-3.localnet.farm/rpc/v0",
             accounts: [PRIVATE_KEY],
         },
     },

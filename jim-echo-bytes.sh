@@ -21,6 +21,6 @@ echo 'Block number:' $(cast block-number)
 
 set -x
 
-cast call $CONTRACT "echoBytes(bytes)" 0xdeadbeef
+cast call $CONTRACT "echoBytes(bytes)" 0x00000000deadbeef
 
 
