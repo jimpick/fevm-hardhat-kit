@@ -42,7 +42,13 @@ library VerifRegAPI {
     function getClaims(VerifRegTypes.GetClaimsParams memory params) internal returns (VerifRegTypes.GetClaimsReturn memory) {
         bytes memory raw_request = params.serialize();
 
-        bytes memory raw_response = Actor.call(VerifRegTypes.GetClaimsMethodNum, VerifRegTypes.ActorCode, raw_request, Misc.CBOR_CODEC);
+        bytes memory raw_response = Actor.call(
+            VerifRegTypes.GetClaimsMethodNum,
+            VerifRegTypes.ActorID,
+            raw_request,
+            Misc.CBOR_CODEC,
+            msg.value
+        );
 
         bytes memory result = Actor.readRespData(raw_response);
 
@@ -57,9 +63,10 @@ library VerifRegAPI {
 
         bytes memory raw_response = Actor.call(
             VerifRegTypes.AddVerifierClientMethodNum,
-            VerifRegTypes.ActorCode,
+            VerifRegTypes.ActorID,
             raw_request,
-            Misc.CBOR_CODEC
+            Misc.CBOR_CODEC,
+            msg.value
         );
 
         Actor.readRespData(raw_response);
@@ -74,9 +81,10 @@ library VerifRegAPI {
 
         bytes memory raw_response = Actor.call(
             VerifRegTypes.RemoveExpiredAllocationsMethodNum,
-            VerifRegTypes.ActorCode,
+            VerifRegTypes.ActorID,
             raw_request,
-            Misc.CBOR_CODEC
+            Misc.CBOR_CODEC,
+            msg.value
         );
 
         bytes memory result = Actor.readRespData(raw_response);
@@ -92,9 +100,10 @@ library VerifRegAPI {
 
         bytes memory raw_response = Actor.call(
             VerifRegTypes.ExtendClaimTermsMethodNum,
-            VerifRegTypes.ActorCode,
+            VerifRegTypes.ActorID,
             raw_request,
-            Misc.CBOR_CODEC
+            Misc.CBOR_CODEC,
+            msg.value
         );
 
         bytes memory result = Actor.readRespData(raw_response);
@@ -112,9 +121,10 @@ library VerifRegAPI {
 
         bytes memory raw_response = Actor.call(
             VerifRegTypes.RemoveExpiredClaimsMethodNum,
-            VerifRegTypes.ActorCode,
+            VerifRegTypes.ActorID,
             raw_request,
-            Misc.CBOR_CODEC
+            Misc.CBOR_CODEC,
+            msg.value
         );
 
         bytes memory result = Actor.readRespData(raw_response);
@@ -132,9 +142,10 @@ library VerifRegAPI {
 
         bytes memory raw_response = Actor.call(
             VerifRegTypes.UniversalReceiverMethodNum,
-            VerifRegTypes.ActorCode,
+            VerifRegTypes.ActorID,
             raw_request,
-            Misc.CBOR_CODEC
+            Misc.CBOR_CODEC,
+            msg.value
         );
 
         bytes memory result = Actor.readRespData(raw_response);

@@ -19,35 +19,24 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity >=0.4.25 <=0.8.17;
 
-/// @title Filecoin init actor types for Solidity.
-/// @author Zondax AG
-library InitTypes {
-    bytes constant ActorID = hex"0001";
-    uint constant ExecMethodNum = 81225168;
-    uint constant Exec4MethodNum = 3;
+import {MinerMockAPI} from "../MinerMockAPI.sol";
+import {CommonTypes} from "../../types/CommonTypes.sol";
+import {MinerTypes} from "../../types/MinerTypes.sol";
 
-    struct ExecParams {
-        bytes code_cid;
-        bytes constructor_params;
+contract MinerTestApi {
+    address minerApiAddress;
+
+    constructor(address _minerApiAddress) {
+        minerApiAddress = _minerApiAddress;
     }
 
-    struct ExecReturn {
-        /// ID based address for created actor
-        bytes id_address;
-        /// Reorg safe address for actor
-        bytes robust_address;
+    function test_get_owner() public view {
+        MinerMockAPI marketApiInstance = MinerMockAPI(minerApiAddress);
+        marketApiInstance.getOwner();
     }
 
-    struct Exec4Params {
-        bytes code_cid;
-        bytes constructor_params;
-        bytes subaddress;
-    }
-
-    struct Exec4Return {
-        /// ID based address for created actor
-        bytes id_address;
-        /// Reorg safe address for actor
-        bytes robust_address;
+    function test_get_sector_size() public view {
+        MinerMockAPI marketApiInstance = MinerMockAPI(minerApiAddress);
+        marketApiInstance.getSectorSize();
     }
 }

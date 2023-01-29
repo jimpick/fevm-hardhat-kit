@@ -19,35 +19,27 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity >=0.4.25 <=0.8.17;
 
-/// @title Filecoin init actor types for Solidity.
+import "../PrecompilesAPI.sol";
+
 /// @author Zondax AG
-library InitTypes {
-    bytes constant ActorID = hex"0001";
-    uint constant ExecMethodNum = 81225168;
-    uint constant Exec4MethodNum = 3;
-
-    struct ExecParams {
-        bytes code_cid;
-        bytes constructor_params;
+contract PrecompilesApiTest {
+    function resolve_address(bytes memory addr) public view returns (uint64) {
+        return PrecompilesAPI.resolveAddress(addr);
     }
 
-    struct ExecReturn {
-        /// ID based address for created actor
-        bytes id_address;
-        /// Reorg safe address for actor
-        bytes robust_address;
+    function resolve_eth_address(bytes memory addr) public view returns (uint64) {
+        return PrecompilesAPI.resolveEthAddress(addr);
     }
 
-    struct Exec4Params {
-        bytes code_cid;
-        bytes constructor_params;
-        bytes subaddress;
+    function lookup_delegated_address(uint64 actor_id) public view returns (bytes memory) {
+        return PrecompilesAPI.lookupDelegatedAddress(actor_id);
     }
 
-    struct Exec4Return {
-        /// ID based address for created actor
-        bytes id_address;
-        /// Reorg safe address for actor
-        bytes robust_address;
+    function get_actor_type(uint64 actor_id) public view returns (uint256) {
+        return PrecompilesAPI.getActorType(actor_id);
+    }
+
+    function get_ripemd160_hash(bytes memory input) public view returns (bytes memory) {
+        return PrecompilesAPI.getRipemd160Hash(input);
     }
 }

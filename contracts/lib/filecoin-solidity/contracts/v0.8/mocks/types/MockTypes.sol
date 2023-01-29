@@ -19,35 +19,23 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity >=0.4.25 <=0.8.17;
 
-/// @title Filecoin init actor types for Solidity.
+/// @title Filecoin market actor types for Solidity.
 /// @author Zondax AG
-library InitTypes {
-    bytes constant ActorID = hex"0001";
-    uint constant ExecMethodNum = 81225168;
-    uint constant Exec4MethodNum = 3;
-
-    struct ExecParams {
-        bytes code_cid;
-        bytes constructor_params;
-    }
-
-    struct ExecReturn {
-        /// ID based address for created actor
-        bytes id_address;
-        /// Reorg safe address for actor
-        bytes robust_address;
-    }
-
-    struct Exec4Params {
-        bytes code_cid;
-        bytes constructor_params;
-        bytes subaddress;
-    }
-
-    struct Exec4Return {
-        /// ID based address for created actor
-        bytes id_address;
-        /// Reorg safe address for actor
-        bytes robust_address;
+library MockTypes {
+    struct Deal {
+        uint64 id;
+        bytes cid;
+        uint64 size;
+        bool verified;
+        uint64 client;
+        uint64 provider;
+        string label;
+        int64 start;
+        int64 end;
+        uint256 price_per_epoch;
+        uint256 provider_collateral;
+        uint256 client_collateral;
+        int64 activated;
+        int64 terminated;
     }
 }

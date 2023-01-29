@@ -19,35 +19,28 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity >=0.4.25 <=0.8.17;
 
-/// @title Filecoin init actor types for Solidity.
+import "../types/PowerTypes.sol";
+import "../PowerAPI.sol";
+
 /// @author Zondax AG
-library InitTypes {
-    bytes constant ActorID = hex"0001";
-    uint constant ExecMethodNum = 81225168;
-    uint constant Exec4MethodNum = 3;
-
-    struct ExecParams {
-        bytes code_cid;
-        bytes constructor_params;
+contract PowerApiTest {
+    function create_miner(PowerTypes.CreateMinerParams memory params) public returns (PowerTypes.CreateMinerReturn memory) {
+        return PowerAPI.createMiner(params);
     }
 
-    struct ExecReturn {
-        /// ID based address for created actor
-        bytes id_address;
-        /// Reorg safe address for actor
-        bytes robust_address;
+    function miner_count() public returns (uint64) {
+        return PowerAPI.minerCount();
     }
 
-    struct Exec4Params {
-        bytes code_cid;
-        bytes constructor_params;
-        bytes subaddress;
+    function miner_consensus_count() public returns (int64) {
+        return PowerAPI.minerConsensusCount();
     }
 
-    struct Exec4Return {
-        /// ID based address for created actor
-        bytes id_address;
-        /// Reorg safe address for actor
-        bytes robust_address;
+    function network_raw_power() public returns (BigInt memory) {
+        return PowerAPI.networkRawPower();
+    }
+
+    function miner_raw_power(uint64 minerID) public returns (PowerTypes.MinerRawPowerReturn memory) {
+        return PowerAPI.minerRawPower(minerID);
     }
 }
