@@ -19,4 +19,8 @@ contract Counter {
         MinerTypes.GetOwnerReturn memory ownerRet = MinerAPI.getOwner(target);
         return ownerRet;
     }
+
+    function echoBytes(bytes memory target) public pure returns (bytes memory) {
+        return target;
+    }
 }
