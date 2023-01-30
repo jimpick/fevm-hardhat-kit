@@ -72,4 +72,17 @@ contract Counter {
 
         return buf;
     }
+
+    event ContractIDAddress(bytes);
+    event MinerIDAddress(bytes);
+
+    function changeMinerOwnerToContract(uint64 id) public {
+        address contractAddress = address(this);
+        uint64 resolved = PrecompilesAPI.resolveEthAddress(abi.encodePacked(contractAddress));
+        emit ResolvedContractAddress(resolved);
+        bytes memory contractEncoded = encodeIDAddress(resolved);
+        emit ContractIDAddress(contractEncoded);
+        bytes memory minerEncoded = encodeIDAddress(id);
+        emit MinerIDAddress(minerEncoded);
+    }
 }
