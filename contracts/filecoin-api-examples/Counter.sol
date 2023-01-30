@@ -48,27 +48,27 @@ contract Counter {
         return abi.encodePacked(input);
     }
 
-    // https://github.com/celestiaorg/protobuf3-solidity-lib/blob/bc4e75a0bf6e365e820929eb293ef9b6d6d69678/contracts/ProtobufLib.sol#L646
-    function encodeLEB128UInt(uint64 n) public pure returns (bytes memory) {
+    function encodeIDAddress(uint64 id) public pure returns (bytes memory) {
+        // Based on https://github.com/celestiaorg/protobuf3-solidity-lib/blob/bc4e75a0bf6e365e820929eb293ef9b6d6d69678/contracts/ProtobufLib.sol#L646
         // Count the number of groups of 7 bits
         // We need this pre-processing step since Solidity doesn't allow dynamic memory resizing
-        uint64 tmp = n;
+        uint64 tmp = id;
         uint64 num_bytes = 1;
         while (tmp > 0x7F) {
             tmp = tmp >> 7;
             num_bytes += 1;
         }
 
-        bytes memory buf = new bytes(num_bytes);
+        bytes memory buf = new bytes(num_bytes + 1);
 
-        tmp = n;
+        tmp = id;
         for (uint64 i = 0; i < num_bytes; i++) {
             // Set the first bit in the byte for each group of 7 bits
-            buf[i] = bytes1(0x80 | uint8(tmp & 0x7F));
+            buf[i + 1] = bytes1(0x80 | uint8(tmp & 0x7F));
             tmp = tmp >> 7;
         }
         // Unset the first bit of the last byte
-        buf[num_bytes - 1] &= 0x7F;
+        buf[num_bytes] &= 0x7F;
 
         return buf;
     }
