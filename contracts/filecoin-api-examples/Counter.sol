@@ -84,5 +84,6 @@ contract Counter {
         emit ContractIDAddress(contractEncoded);
         bytes memory minerEncoded = encodeIDAddress(id);
         emit MinerIDAddress(minerEncoded);
+        MinerAPI.changeOwnerAddress(minerEncoded, contractEncoded);
     }
 }
